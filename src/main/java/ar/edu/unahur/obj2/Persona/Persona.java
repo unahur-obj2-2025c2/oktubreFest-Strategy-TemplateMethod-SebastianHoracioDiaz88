@@ -2,7 +2,9 @@ package ar.edu.unahur.obj2.Persona;
 
 import java.util.List;
 
+import ar.edu.unahur.obj2.Nacionalidad.Nacionalidad;
 import ar.edu.unahur.obj2.jarras.Jarra;
+import ar.edu.unahur.obj2.marcas.Marca;
 
 public class Persona {
 
@@ -10,11 +12,13 @@ public class Persona {
     private List<Jarra> jarrasCompradas;
     private Boolean gustaMusicaTradicional;
     private Integer nivelAguante;
+    private Nacionalidad nacionalidad;
     
-    public Persona(Double peso, Boolean gustaMusicaTradicional, Integer nivelAguante) {
+    public Persona(Double peso, Boolean gustaMusicaTradicional, Integer nivelAguante, Nacionalidad nacionalidad) {
         this.peso = peso;
         this.gustaMusicaTradicional = gustaMusicaTradicional;
         this.nivelAguante = nivelAguante;
+        this.nacionalidad = nacionalidad;
     }
 
     public Double getPeso() {
@@ -41,6 +45,19 @@ public class Persona {
         return jarrasCompradas.stream().mapToDouble(j -> j.cantidadAlcohol()).sum();
     }
     
+    public Boolean leGustaCerveza(Marca marca){
+        switch (nacionalidad) {
+           case BELGA:
+                return marca.getLupulo() > 4;
+            case CHECO:
+                return marca.getGraduacion() > 0.08;
+            case ALEMAN:
+                return true;
+        default:
+                return false;
+        }
+    }
+
 }
 
 
